@@ -73,16 +73,17 @@ function Modal () {
     .modal-row-right {
       float: left;
       width: 50%;
+      text-align: center;
     }
     .clearfix {
       clear: left;
     }
-    .modal-row-right,
-    .modal-buttons {
-      text-align: center;
-    }
     #modal-green-arrow {
       width: 65px;
+    }
+    #computer {
+      width: 100%;
+      max-width: 279px;
     }
     h2 {
       font-family: 'Open Sans', sans-serif;
@@ -116,7 +117,7 @@ function Modal () {
     <div class=${prefix}>
       <div class="modal-row">
         <div class="modal-row-left">
-          <img src="${hostname}img/beta-screen.png">
+          <img src="${hostname}img/beta-screen.png" id="computer">
         </div>
         <div class="modal-row-right">
           <img src="${hostname}img/green-arrow.png" id="modal-green-arrow">
