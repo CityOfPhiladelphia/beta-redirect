@@ -43,7 +43,6 @@ function ModalOverlay (contents) {
   function onClickOverlay (e) {
     if (e.target === overlay) {
       hideOverlay()
-      console.log('clicked')
     }
     e.preventDefault()
     e.stopPropagation()
