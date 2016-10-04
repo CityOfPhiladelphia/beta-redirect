@@ -30,7 +30,7 @@ function ModalOverlay (contents) {
   `
 
   var overlay = html`
-    <div class=${prefix} onclick=${onClickOverlay}>
+    <div id="beta-overlay" class=${prefix} onclick=${onClickOverlay}>
       ${contents}
     </div>
   `
@@ -114,7 +114,7 @@ function Modal () {
   `
 
   var modal = html`
-    <div class=${prefix}>
+    <div id="beta-modal" class=${prefix}>
       <div class="modal-row">
         <div class="modal-row-left">
           <img src="${hostname}img/beta-screen.png" id="computer">
