@@ -7,7 +7,9 @@ var MODAL_POPUP_DELAY = 500 // milliseconds
 var hostname = 'https://cityofphiladelphia.github.io/beta-redirect/'
 var existingCookie = Cookies.get('beta')
 
-if (existingCookie === 'opt-in') {
+if (window.location.search.substring(1) === 'opt-out') {
+  Cookies.set('beta', 'opt-out')
+} else if (existingCookie === 'opt-in') {
   redirectToBeta()
 } else if (existingCookie !== 'opt-out') {
   window.setTimeout(function () {
