@@ -8,7 +8,7 @@ var hostname = 'https://cityofphiladelphia.github.io/beta-redirect/'
 var existingCookie = Cookies.get('beta')
 
 if (window.location.search.substring(1) === 'opt-out') {
-  Cookies.set('beta', 'opt-out')
+  Cookies.set('beta', 'opt-out', { domain: 'phila.gov' })
 } else if (existingCookie === 'opt-in') {
   redirectToBeta()
 } else if (existingCookie !== 'opt-out') {
@@ -145,13 +145,13 @@ function Modal () {
   return modal
 
   function onDecline (e) {
-    Cookies.set('beta', 'opt-out')
+    Cookies.set('beta', 'opt-out', { domain: 'phila.gov' })
     modal.parentNode.hide()
     e.preventDefault()
   }
 
   function onAccept (e) {
-    Cookies.set('beta', 'opt-in')
+    Cookies.set('beta', 'opt-in', { domain: 'phila.gov' })
     redirectToBeta()
     e.preventDefault()
   }
