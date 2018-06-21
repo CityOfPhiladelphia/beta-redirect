@@ -4,11 +4,12 @@ var css = require('sheetify')
 require('insert-css')('@import "https://fonts.googleapis.com/css?family=Open+Sans";')
 
 var MODAL_POPUP_DELAY = 500 // milliseconds
+var COOKIE_NAME = 'beta-july2018'
 var hostname = 'https://cityofphiladelphia.github.io/beta-redirect/'
-var existingCookie = Cookies.get('beta')
+var existingCookie = Cookies.get(COOKIE_NAME)
 
 if (window.location.search.substring(1) === 'opt-out') {
-  Cookies.set('beta', 'opt-out', { domain: 'phila.gov' })
+  Cookies.set(COOKIE_NAME, 'opt-out', { domain: 'phila.gov' })
 } else if (existingCookie === 'opt-in') {
   redirectToBeta()
 } else if (existingCookie !== 'opt-out') {
@@ -62,36 +63,21 @@ function ModalOverlay (contents) {
 function Modal () {
   var prefix = css`
     :host {
-      width: 60%;
+      width: 90%;
       min-height: 300px;
+      max-width: 600px;
       background-color: #f0f0f0;
       margin: 0 auto;
       margin-top: 10%;
-      padding: 1.5rem;
       font-family: 'Open Sans', sans-serif;
+      border: 3px #09508D solid;
     }
-    .modal-row-left,
-    .modal-row-right {
-      float: left;
-      width: 50%;
-      text-align: center;
-    }
-    .clearfix {
-      clear: left;
-    }
-    #modal-green-arrow {
-      width: 65px;
-    }
-    #computer {
+    #splash-image {
       width: 100%;
-      max-width: 279px;
     }
-    h2 {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: bold !important;
-    }
-    .subtext {
-      font-size: 130%;
+    .button-container {
+      padding: 25px;
+      text-align: center;
     }
     #accept-beta,
     #decline-beta {
@@ -100,44 +86,45 @@ function Modal () {
       font-weight: bold;
       font-size: 140%;
       text-transform: uppercase;
-      width: 90%;
+      width: 60%;
+      max-width: 350px;
       padding: 0.5rem;
       cursor: pointer;
     }
     #accept-beta {
       background-color: #04CDF9;
       border: none;
+      margin-bottom: 15px;
     }
     #decline-beta {
       background-color: #fff;
       border: 1px #04CDF9 solid;
+    }
+    .arrow-down {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #09508D;
+      margin: 0 auto;
     }
   `
 
   var modal = html`
     <div id="beta-modal" class=${prefix}>
       <div class="modal-row">
-        <div class="modal-row-left">
-          <img src="${hostname}img/beta-screen.png" id="computer">
-        </div>
-        <div class="modal-row-right">
-          <img src="${hostname}img/green-arrow.png" id="modal-green-arrow">
-          <h2>The City is in the process of redesigning phila.gov to better meet your needs.</h2>
-          <p class="subtext">Are you interested in using the site that's being worked on, which is called beta.phila.gov?</p>
-        </div>
-        <div class="clearfix"></div>
+        <img src="${hostname}img/beta-modal.png" id="splash-image">
       </div>
-      <div class="modal-row">
-        <div class="modal-row-left">
-          <button type="button" id="decline-beta" onclick=${onDecline}>
-            No, return to phila.gov
-          </button>
-        </div>
-        <div class="modal-row-right">
-          <button type="button" id="accept-beta" onclick=${onAccept}>
-            Yes, take me to beta.phila.gov
-          </button>
-        </div>
+      <div class="modal-row arrow-container">
+        <div class="arrow-down"></div>
+      </div>
+      <div class="modal-row button-container">
+        <button type="button" id="accept-beta" onclick=${onAccept}>
+          See the redesign
+        </button>
+        <button type="button" id="decline-beta" onclick=${onDecline}>
+          Return to phila.gov
+        </button>
       </div>
     </div>
   `
@@ -145,13 +132,13 @@ function Modal () {
   return modal
 
   function onDecline (e) {
-    Cookies.set('beta', 'opt-out', { domain: 'phila.gov' })
+    Cookies.set(COOKIE_NAME, 'opt-out', { domain: 'phila.gov' })
     modal.parentNode.hide()
     e.preventDefault()
   }
 
   function onAccept (e) {
-    Cookies.set('beta', 'opt-in', { domain: 'phila.gov' })
+    Cookies.set(COOKIE_NAME, 'opt-in', { domain: 'phila.gov' })
     redirectToBeta()
     e.preventDefault()
   }
