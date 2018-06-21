@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "budo src/index.js:build/bundle.js --live -- -t sheetify/transform",
-    "build": "browserify src/index.js -t sheetify/transform -g yo-yoify | uglifyjs -- > build/bundle.js"
+    "build": "browserify src/index.js -t sheetify/transform -g yo-yoify | uglifyjs -- > build/bundle-july2018.js"
   },
   "repository": {
     "type": "git",
